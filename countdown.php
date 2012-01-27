@@ -2,7 +2,7 @@
 /*
 Plugin Name: Countdown
 Plugin URI: http://studio.bloafer.com/wordpress-plugins/countdown/
-Description: Use the shortcode [countdown] to create a countdown system.
+Description: This plugin adds a shortcode [countdown] to WP allowing you to place a countdown timer on your page.
 Version: 0.2
 Author: Kerry James
 Author URI: http://studio.bloafer.com/
