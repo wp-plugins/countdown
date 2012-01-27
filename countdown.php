@@ -3,7 +3,7 @@
 Plugin Name: Countdown
 Plugin URI: http://studio.bloafer.com/wordpress-plugins/countdown/
 Description: Use the shortcode [countdown] to create a countdown system.
-Version: 0.1
+Version: 0.2
 Author: Kerry James
 Author URI: http://studio.bloafer.com/
 */
@@ -36,10 +36,10 @@ function count<?php print $randID ?>timer(){
 	amount = dateFuture.getTime() - dateNow.getTime()+5;
 	delete dateNow;
 	if(amount < 0){
-		$("#<?php print $randID ?> .days .number").html("0");
-		$("#<?php print $randID ?> .hour .number").html("0");
-		$("#<?php print $randID ?> .mins .number").html("0");
-		$("#<?php print $randID ?> .secs .number").html("0");
+		jQuery("#<?php print $randID ?> .days .number").html("0");
+		jQuery("#<?php print $randID ?> .hour .number").html("0");
+		jQuery("#<?php print $randID ?> .mins .number").html("0");
+		jQuery("#<?php print $randID ?> .secs .number").html("0");
 	}else{
 		days = 0;
 		hours = 0;
@@ -53,31 +53,31 @@ function count<?php print $randID ?>timer(){
 		mins = Math.floor(amount / 60);
 		amount = amount % 60;
 		secs = Math.floor(amount);
-		if($("#<?php print $randID ?> .days .number").html()!=days){
-			$("#<?php print $randID ?> .days .number").html(days);
+		if(jQuery("#<?php print $randID ?> .days .number").html()!=days){
+			jQuery("#<?php print $randID ?> .days .number").html(days);
 		}
-		if($("#<?php print $randID ?> .hour .number").html()!=hours){
-			$("#<?php print $randID ?> .hour .number").html(hours);
+		if(jQuery("#<?php print $randID ?> .hour .number").html()!=hours){
+			jQuery("#<?php print $randID ?> .hour .number").html(hours);
 		}
-		if($("#<?php print $randID ?> .mins .number").html()!=mins){
-			$("#<?php print $randID ?> .mins .number").html(mins);
+		if(jQuery("#<?php print $randID ?> .mins .number").html()!=mins){
+			jQuery("#<?php print $randID ?> .mins .number").html(mins);
 		}
-		if($("#<?php print $randID ?> .secs .number").html()!=secs){
-			$("#<?php print $randID ?> .secs .number").html(secs);
+		if(jQuery("#<?php print $randID ?> .secs .number").html()!=secs){
+			jQuery("#<?php print $randID ?> .secs .number").html(secs);
 		}
 
-		if(days==0){ $("#<?php print $randID ?> .days").hide(); }
+		if(days==0){ jQuery("#<?php print $randID ?> .days").hide(); }
 		
 		setTimeout("count<?php print $randID ?>timer()", 1000);
 	}
 }
-$(document).ready(function(){
+jQuery(document).ready(function(){
 	var holder_stuff = '<span class="number"></span><span class="over"></span><span class="title"></span>';
-	var holder_days = $("<span>").addClass("days").addClass("item").html(holder_stuff);
-	var holder_hour = $("<span>").addClass("hour").addClass("item").html(holder_stuff);
-	var holder_mins = $("<span>").addClass("mins").addClass("item").html(holder_stuff);
-	var holder_secs = $("<span>").addClass("secs").addClass("item").html(holder_stuff);
-	$("#<?php print $randID ?>").html("").append(holder_days).append(holder_hour).append(holder_mins).append(holder_secs);
+	var holder_days = jQuery("<span>").addClass("days").addClass("item").html(holder_stuff);
+	var holder_hour = jQuery("<span>").addClass("hour").addClass("item").html(holder_stuff);
+	var holder_mins = jQuery("<span>").addClass("mins").addClass("item").html(holder_stuff);
+	var holder_secs = jQuery("<span>").addClass("secs").addClass("item").html(holder_stuff);
+	jQuery("#<?php print $randID ?>").html("").append(holder_days).append(holder_hour).append(holder_mins).append(holder_secs);
 	count<?php print $randID ?>timer();
 });
 </script>
@@ -90,5 +90,10 @@ $(document).ready(function(){
 	return $output;
 }
 add_shortcode('countdown', 'countdown_shortcode_handler');
+
+function countdown_wp_enqueue_scripts(){
+	wp_enqueue_script('jquery');
+}
+add_action('wp_enqueue_scripts', 'countdown_wp_enqueue_scripts');
 
 ?>
